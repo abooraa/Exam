@@ -1,0 +1,46 @@
+@* page will show one Wedding detail *@
+@* ViewBag.User *@
+@model TheActivity
+
+<div class="top">
+<h1>Dojo Activity Center</h1>
+<p> <a asp-action="Dashboard" asp-controller="TheActivity">Home  </a> | 
+<a asp-action="LogOut" asp-controller="Home">LogOut</a></p>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="top">
+        <h1>@Model.Title</h1> 
+         @* buttons here, Delete if user is poster otherwise show Join or Leave *@
+        @if (Model.CreatedBy.UserId == ViewBag.User.UserId)
+                    {
+                        <a aasp-action="Delete" asp-controller="TheActivity" asp-route-activityId="@Model.TheActivityId"><button
+                        class="btn btn-sm btn-danger">Delete</button></a>
+                    }
+                    @* else if user already Join activity show the Leave button *@
+        else if (Model.Members.Any(f => f.UserId == ViewBag.User.UserId))
+        {
+            <a asp-action="Leave" asp-controller="TheActivity" asp-route-activityId="@Model.TheActivityId"><button
+                class="btn btn-sm btn-warning">Leave</button></a>
+        }
+        @* else user has not join show the join button *@
+        else
+        {
+            <a asp-action="Join" asp-controller="TheActivity" asp-route-activityId="@Model.TheActivityId"><button
+                class="btn btn-sm btn-primary">Jion</button></a>
+        }
+        </div>
+        <h3>Event Coordinator :@Model.CreatedBy.Name </h3>
+        <h4>Description :</h4>
+        <p>@Model.Description</p>
+        <h4>Participants:</h4>
+        <ul>
+            @foreach (var Participant in Model.Members)
+            {
+                <li>@Participant.Member.Name </li>
+            }
+        </ul>
+       
+    </div>
+    
+</div>

@@ -1,0 +1,42 @@
+@* ViewBag.User *@
+@model TheActivity
+<div class="top">
+<h1>Dojo Activity Center</h1>
+<p> <a asp-action="Dashboard" asp-controller="TheActivity">Home</a> 
+<a asp-action="LogOut" asp-controller="Home">LogOut</a></p>
+</div>
+<div class="form">
+<form asp-action="PostActivity" asp-controller="TheActivity" method="POST">
+    <div class="col-md-3">
+        <label asp-for="Title"></label>
+        <input asp-for="Title" /><br />
+        <span class="text-danger" asp-validation-for="Title"></span>
+    </div>
+    <div class="col-md-3">
+        <label asp-for="Time"></label>
+        <input asp-for="Time" /><br />
+        <span class="text-danger" asp-validation-for="Time"></span>
+    </div>
+    <div class="col-md-3">
+        <label asp-for="Date"></label>
+        <input asp-for="Date" /><br />
+        <span class="text-danger" asp-validation-for="Date"></span>
+    </div>
+     <div class="col-md-3">
+        <label asp-for="Duration"></label>
+        <input asp-for="Duration" /><br />
+        
+        <select asp-for="DurationState">
+            <option value="Hours">Hours</option>
+            <option value="Minutes">Minutes</option>
+            <option value="Days">Days</option>
+        </select>
+    </div>
+    <div class="col-md-3 ">
+        <label asp-for="Description">Description</label>
+        <textarea asp-for="Description" cols="30" rows="10"></textarea>
+        <span asp-validation-for="Description"></span>
+    </div>
+    <button type="submit" class="btn-primary">Create Activity</button>
+</form>
+</div>
